@@ -25,7 +25,7 @@ import io.runtime.mcumgr.exception.McuMgrException
 import java.io.IOException
 
 /** FlutterMcumgrPlugin */
-class FlutterMcumgrPlugin : FlutterPlugin, MethodCallHandler,ActivityAware {
+class FlutterMcumgrPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -39,9 +39,6 @@ class FlutterMcumgrPlugin : FlutterPlugin, MethodCallHandler,ActivityAware {
 
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     private val upgrades: MutableMap<String, DeviceUpgrade> = mutableMapOf()
-
-
-
 
 
     private fun setup(plugin: FlutterMcumgrPlugin, binaryMessenger: BinaryMessenger) {
@@ -64,21 +61,30 @@ class FlutterMcumgrPlugin : FlutterPlugin, MethodCallHandler,ActivityAware {
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         if (call.method == "getPlatformVersion") {
             result.success("Android ${android.os.Build.VERSION.RELEASE}")
-        } 
-        else if (call.method == "startDfu") {
+        } else if (call.method == "startDfu") {
+            val id = call.argument<String>("id")
+            val macAddress = call.argument<String>("macAddress")
+            val updateFileUriString = call.argument<String>("updateFileUriString")
+            val updateOptions = call.argument<HashMap<String, Any>>("updateOptions")
 
-        }
-        else {
+            startDfu(id!!,macAddress,updateFileUriString,updateOptions!!)
+
+        } else {
             result.notImplemented()
         }
     }
 
 
-    private fun startDfu(id: String, macAddress: String?, updateFileUriString: String?, updateOptions: HashMap<String, Any>) {
+    private fun startDfu(
+        id: String,
+        macAddress: String?,
+        updateFileUriString: String?,
+        updateOptions: HashMap<String, Any>
+    ) {
         if (this.bluetoothAdapter == null) {
             throw Exception("no bluetooth adapter")
         }
-        if (upgrades.contains(id)){
+        if (upgrades.contains(id)) {
             throw Exception("update ID already present")
         }
 
@@ -91,8 +97,6 @@ class FlutterMcumgrPlugin : FlutterPlugin, MethodCallHandler,ActivityAware {
         this.upgrades[id]!!.doUpdate(updateFileUri)
 
     }
-
-
 
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {

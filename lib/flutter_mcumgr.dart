@@ -18,6 +18,8 @@ class FlutterMcumgr {
           break;
       }
     });
+
+    return "";
   }
 }
 
