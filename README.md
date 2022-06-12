@@ -23,3 +23,7 @@ https://codelabs.developers.google.com/codelabs/write-flutter-plugin#6
 
 
 flutter create --org com.riftlabs --template=plugin --platforms=android,ios -i objc -a kotlin  .
+
+
+Plugin examples:
+https://github.com/flutter/plugins/tree/master_archive/packages
