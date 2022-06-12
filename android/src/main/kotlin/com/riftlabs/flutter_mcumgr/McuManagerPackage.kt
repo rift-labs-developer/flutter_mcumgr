@@ -1,4 +1,4 @@
-package uk.co.playerdata.reactnativemcumanager
+package com.riftlabs.flutter_mcumgr
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule

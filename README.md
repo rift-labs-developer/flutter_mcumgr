@@ -20,7 +20,7 @@ https://github.com/PlayerData/react-native-mcu-manager/blob/main/android/build.g
 
 
 https://codelabs.developers.google.com/codelabs/write-flutter-plugin#6
-
+https://dev.to/theotherdevs/mastering-flutter-create-a-plugin-5h63
 
 flutter create --org com.riftlabs --template=plugin --platforms=android,ios -i objc -a kotlin  .
 

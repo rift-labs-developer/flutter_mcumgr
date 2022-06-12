@@ -1,4 +1,4 @@
-package uk.co.playerdata.reactnativemcumanager
+package com.riftlabs.flutter_mcumgr
 
 import android.bluetooth.BluetoothDevice
 import android.net.Uri
